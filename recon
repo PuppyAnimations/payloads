@@ -534,4 +534,5 @@ Clear-RecycleBin -Force -ErrorAction SilentlyContinue
 
 # Exit when the payload is done
 
-$done = New-Object -ComObject Wscript.Shell;$done.Popup("Update Completed",1)
+exit
+exit
