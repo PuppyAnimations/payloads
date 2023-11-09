@@ -535,4 +535,3 @@ Clear-RecycleBin -Force -ErrorAction SilentlyContinue
 # Exit when the payload is done
 
 exit
-exit
